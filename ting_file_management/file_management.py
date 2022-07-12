@@ -1,14 +1,5 @@
 from sys import stderr
-from subprocess import check_output, CalledProcessError
-
-
-def file_exists(path_file):
-    command = f"ls {path_file} &> /dev/null"
-    try:
-        check_output(command, shell=True)
-        return True
-    except CalledProcessError:
-        return False
+from os.path import exists as file_exists
 
 
 def txt_importer(path_file):
