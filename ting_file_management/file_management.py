@@ -1,10 +1,10 @@
-from sys import stderr
+import sys
 from os.path import exists as file_exists
 
 
 def txt_importer(path_file):
     if not file_exists(path_file):
-        stderr.write(f"Arquivo {path_file} não encontrado")
+        print(f"Arquivo {path_file} não encontrado", file=sys.stderr)
         return None
     file_content = []
     with open(path_file, mode="r") as file:
