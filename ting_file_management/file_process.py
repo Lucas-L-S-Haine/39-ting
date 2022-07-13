@@ -1,3 +1,6 @@
+import sys
+
+
 def process(path_file, instance):
     for index in range(len(instance)):
         if instance.search(index) == path_file:
@@ -27,4 +30,20 @@ def remove(instance):
 
 
 def file_metadata(instance, position):
-    """Aqui irá sua implementação"""
+    try:
+        file_name = instance.search(position)
+    except IndexError:
+        print("Posição inválida", file=sys.stderr)
+        return None
+    file_content = []
+    lines = 0
+    with open(file_name, mode="r") as file:
+        for row in file:
+            file_content.append(row.strip())
+            lines += 1
+    file_metadata = {
+        "nome_do_arquivo": file_name,
+        "qtd_linhas": lines,
+        "linhas_do_arquivo": file_content
+    }
+    print(file_metadata)
