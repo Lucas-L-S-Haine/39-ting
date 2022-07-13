@@ -19,4 +19,17 @@ def exists_word(word, instance):
 
 
 def search_by_word(word, instance):
-    pass
+    search = exists_word(word, instance)
+    for index in range(len(search)):
+        file_name = search[index]["arquivo"]
+        lines = [item["linha"] for item in search[index]["ocorrencias"]]
+        ocurrences = []
+        with open(file_name, mode="r") as file:
+            content = file.read().split("\n")
+        for line_number in lines:
+            ocurrences.append({
+                "linha": line_number,
+                "conteudo": content[line_number - 1]
+            })
+        search[index]["ocorrencias"] = ocurrences
+    return search
